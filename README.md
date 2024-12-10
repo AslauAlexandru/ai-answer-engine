@@ -8,7 +8,7 @@ git clone https://github.com/team-headstart/ai-answer-engine.git
 ```
 or
 ```bash
-git clone https://github.com/team-headstart/ai-answer-engine.git
+git clone https://github.com/AslauAlexandru/ai-answer-engine
 ```
 
 
