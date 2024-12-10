@@ -6,6 +6,11 @@ First, clone the repository and install the dependencies:
 ```bash
 git clone https://github.com/team-headstart/ai-answer-engine.git
 ```
+or
+```bash
+git clone https://github.com/team-headstart/ai-answer-engine.git
+```
+
 
 Navigate to the project directory:
 ```bash
