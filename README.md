@@ -66,7 +66,7 @@ a company currently valued at over $9 Billion.
 
 **Getting Started**
 
-- Clone this GitHub Repository
+- Clone this [GitHub Repository](https://github.com/team-headstart/ai-answer-engine)
 - Take a look at the TODOs throughout the repo, namely:
   - src/app/page.tsx: Update the UI and handle the API response as needed
   - src/app/api/chat/route.ts: Implement the chat API with Groq and web scraping with Cheerio and Puppeteer
