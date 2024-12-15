@@ -3,14 +3,14 @@
 import { useState } from "react";
 
 type Message = {
-  role: "user" | "ai";
+  role: "user" | "assistant";
   content: string;
 };
 
 export default function Home() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([
-    { role: "ai", content: "Hello! How can I help you today?" },
+    { role: "assistant", content: "Hello! How can I help you today?" },
   ]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,15 +30,31 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ message }),
+
+        // decomment if you want to use message and messages for json is for
+        // app/api/chat/route.ts for const { message, messages } = await req.json(); and 
+        // src/app/utils/groqClient.ts for 
+        // export async function getGroqResponse(chatMessages: ChatMessage[]) {..., ...[... ...chatMessages], ...}
+        //body: JSON.stringify({ message, messages}),
       });
 
       // TODO: Handle the response from the chat API to display the AI response in the UI
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
+      const data = await response.json();
+      
+      // Add AI response to the conversation
+      const aiMessage = { role: "assistant" as const, content: data.response };
+      setMessages(prev => [...prev, aiMessage]);
 
-
+      //END TODO: Handle the response from the chat API to display the AI response in the UI
 
     } catch (error) {
       console.error("Error:", error);
+      // Optionally, add an error message to the conversation
+      setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +68,7 @@ export default function Home() {
       {/* Header */}
       <div className="w-full bg-gray-800 border-b border-gray-700 p-4">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-xl font-semibold text-white">Chat</h1>
+          <h1 className="text-xl font-semibold text-white">AI Answer Engine or Chat</h1>
         </div>
       </div>
 
@@ -63,14 +79,14 @@ export default function Home() {
             <div
               key={index}
               className={`flex gap-4 mb-4 ${
-                msg.role === "ai"
+                msg.role === "assistant"
                   ? "justify-start"
                   : "justify-end flex-row-reverse"
               }`}
             >
               <div
                 className={`px-4 py-2 rounded-2xl max-w-[80%] ${
-                  msg.role === "ai"
+                  msg.role === "assistant"
                     ? "bg-gray-800 border border-gray-700 text-gray-100"
                     : "bg-cyan-600 text-white ml-auto"
                 }`}
