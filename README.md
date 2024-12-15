@@ -55,6 +55,8 @@ To learn more about Next.js, take a look at the following resources:
 all relevant links on the page (e.g., hyperlinks, embedded media links, 
 and scrapes the content from those links as well.
 
+You can check [here](https://github.com/AslauAlexandru/ai-answer-engine/blob/main/src/app/api/chat/route.ts).
+
 # Project Statement 
 
 AI Answer Engine
